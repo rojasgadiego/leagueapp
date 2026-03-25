@@ -18,7 +18,7 @@ const router = createRouter({
     { path: '/compare', name: 'compare', component: CompareView },
     { path: '/live/:puuid', name: 'live', component: LiveView },
     { path: '/builds', name: 'builds', component: BuildsView },
-    { path: '/valorant', name: 'Valorant', component: ValorantView },
+    { path: '/valorant', name: 'valorant', component: ValorantView },
     { path: '/valorant/:gameName/:tagLine', name: 'ValorantSummoner', component: SummonerValorantView}
   ]
 })

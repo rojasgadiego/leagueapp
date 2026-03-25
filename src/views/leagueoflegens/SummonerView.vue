@@ -62,7 +62,7 @@
                                 </span>
                                 <div class="rank-body">
                                     <div class="rank-badge">
-                                        <img :src="`https://ddragon.leagueoflegends.com/cdn/img/ranked-emblems/Emblem_${formatTier(entry.tier)}.png`"
+                                        <img :src="`/images/emblemaslol/${entry.tier}.webp`" alt="Emblema de liga"
                                             class="rank-emblem-img" @error="$event.target.style.display = 'none'" />
                                         <span class="rank-badge-letter">{{ entry.tier?.charAt(0).toUpperCase() }}</span>
                                     </div>
@@ -989,43 +989,23 @@ onMounted(loadData)
 
 .rank-badge {
     flex-shrink: 0;
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
+    width: 80px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    background: linear-gradient(135deg, rgba(200, 155, 60, .22) 0%, rgba(200, 155, 60, .06) 100%);
-    border: 1.5px solid rgba(200, 155, 60, .3);
-    box-shadow: inset 0 1px 0 rgba(200, 155, 60, .15), 0 0 20px rgba(200, 155, 60, .15);
-    overflow: hidden;
 }
 
 .rank-emblem-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
-    position: absolute;
-    inset: 0;
-    opacity: 0.9;
 }
 
 .rank-badge-letter {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: .7rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, .9);
-    position: absolute;
-    bottom: 4px;
-    right: 6px;
-    line-height: 1;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, .8);
-    z-index: 1;
-    background: rgba(0, 0, 0, .45);
-    border-radius: 3px;
-    padding: 1px 2px;
+    display: none;
 }
 
 .rank-info {

@@ -1,17 +1,12 @@
 <template>
     <div class="home">
-
-        <!-- CAPA 1: imagen de fondo (z-index: 0) -->
         <div class="bg-layer">
             <div class="bg-img"></div>
             <div class="bg-grad-left"></div>
             <div class="bg-grad-bottom"></div>
         </div>
 
-        <!-- CAPA 2: todo el contenido (z-index: 10) -->
         <div class="content-layer">
-
-            <!-- NAV -->
             <nav class="nav">
                 <div class="nav-logo">
                     <span class="nav-logo-icon">◈</span>
@@ -22,12 +17,6 @@
             </nav>
 
             <div class="hero">
-
-                <div class="hero-eyebrow fade-in" style="--delay: 0.05s">
-                    <span class="eyebrow-dot"></span>
-                    ESTADÍSTICAS EN TIEMPO REAL
-                </div>
-
                 <h1 class="hero-title">
                     <span class="hero-line fade-in" style="--delay: 0.15s">CONOCE</span>
                     <span class="hero-line accent fade-in" style="--delay: 0.25s">TU JUEGO</span>
@@ -49,15 +38,23 @@
                     </div>
                     <p v-if="errorMsg" class="search-error">{{ errorMsg }}</p>
                 </form>
-
             </div>
 
-            <!-- BADGE INFERIOR -->
-            <div class="bottom-badge fade-in" style="--delay: 0.45s">
-                <span class="badge-dot"></span>
-                LAS · Americas · Actualizado en vivo
+            <div class="bottom-bar" style="--delay: 0.6s">
+                <div class="bottom-bar-left">
+                    <span class="bar-badge">
+                        <span class="badge-ping"></span>
+                        LATAM · Americas
+                    </span>
+                    <span class="bar-sep">|</span>
+                    <span class="bar-info">Actualizado en tiempo real</span>
+                </div>
+                <div class="bottom-bar-right">
+                    <span class="bar-stat">MMR</span>
+                    <span class="bar-stat">HISTORIAL</span>
+                    <span class="bar-stat">CAMPEONES</span>
+                </div>
             </div>
-
         </div>
     </div>
 </template>
@@ -103,21 +100,33 @@ async function search() {
     padding: 0;
 }
 
-/* ─── FADE SIMPLE ───────────────────────────────────── */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+:root {
+    --mono: 'IBM Plex Mono', monospace;
+    --display: 'Syne', sans-serif;
+    --red: #FF4655;
+    --white: #f0ece0;
+    --white-mid: rgba(240, 236, 224, 0.6);
+    --white-dim: rgba(240, 236, 224, 0.3);
+}
 
-    to {
-        opacity: 1;
-    }
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 .fade-in {
     opacity: 0;
     animation: fadeIn 0.55s ease forwards;
     animation-delay: var(--delay, 0s);
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes ping {
+    0%   { transform: scale(1);   opacity: 0.8; }
+    100% { transform: scale(2.4); opacity: 0;   }
 }
 
 /* ─── ROOT ──────────────────────────────────────────── */
@@ -146,54 +155,15 @@ async function search() {
     filter: brightness(0.72) saturate(1.1);
 }
 
-.bg-jinx-light {
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(ellipse 42% 60% at 80% 46%,
-            rgba(255, 200, 80, 0.22) 0%,
-            rgba(255, 140, 30, 0.10) 45%,
-            transparent 70%),
-        radial-gradient(ellipse 18% 28% at 84% 32%,
-            rgba(255, 235, 150, 0.15) 0%,
-            transparent 55%);
-    mix-blend-mode: screen;
-    animation: jinx-flicker 4s ease-in-out infinite;
-}
-
-@keyframes jinx-flicker {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    45% {
-        opacity: 0.82;
-    }
-
-    50% {
-        opacity: 0.95;
-    }
-
-    55% {
-        opacity: 0.78;
-    }
-
-    60% {
-        opacity: 1;
-    }
-}
-
 .bg-grad-left {
     position: absolute;
     inset: 0;
     background: linear-gradient(to right,
-            #07080f 0%,
-            #07080f 25%,
-            rgba(7, 8, 15, 0.9) 42%,
-            rgba(7, 8, 15, 0.4) 60%,
-            transparent 78%);
+        #07080f 0%,
+        #07080f 25%,
+        rgba(7, 8, 15, 0.9) 42%,
+        rgba(7, 8, 15, 0.4) 60%,
+        transparent 78%);
 }
 
 .bg-grad-bottom {
@@ -270,41 +240,6 @@ async function search() {
     max-width: 580px;
 }
 
-.hero-eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    color: #d4a84b;
-    text-transform: uppercase;
-}
-
-.eyebrow-dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: #d4a84b;
-    flex-shrink: 0;
-    box-shadow: 0 0 7px rgba(212, 168, 75, 0.9);
-    animation: pulse 2.2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-
-    0%,
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    50% {
-        opacity: 0.4;
-        transform: scale(0.65);
-    }
-}
-
 .hero-title {
     display: flex;
     flex-direction: column;
@@ -360,19 +295,19 @@ async function search() {
 
 .search-input {
     flex: 1;
-    padding: 1.05rem 0.5rem;
+    padding: 1rem 0.5rem;
     background: transparent;
     border: none;
     outline: none;
-    color: #f0ece0;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.95rem;
-    letter-spacing: 0.05em;
+    color: var(--white);
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
     min-width: 0;
 }
 
 .search-input::placeholder {
-    color: rgba(240, 236, 224, 0.18);
+    color: rgba(240, 236, 224, 0.54);
     letter-spacing: 0.08em;
 }
 
@@ -392,7 +327,7 @@ async function search() {
     cursor: pointer;
     flex-shrink: 0;
     min-width: 90px;
-    border-radius: 0px 20px 20px 0px;
+    border-radius: 0 20px 20px 0;
     justify-content: center;
     transition: background 0.15s, gap 0.2s;
     clip-path: polygon(8px 0%, 100% 0%, 100% 100%, 0% 100%);
@@ -431,34 +366,99 @@ async function search() {
     animation: spin 0.65s linear infinite;
 }
 
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* ─── BADGE INFERIOR ────────────────────────────────── */
-.bottom-badge {
+/* ─── BOTTOM BAR ────────────────────────────────────── */
+.bottom-bar {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0 0 1.75rem 3.5rem;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.1em;
-    color: rgba(240, 236, 224, 0.2);
-    text-transform: uppercase;
+    justify-content: space-between;
+    padding: 0 2.5rem 1.6rem 3.5rem;
     flex-shrink: 0;
 }
 
-.badge-dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: #3a9c65;
-    box-shadow: 0 0 6px rgba(58, 156, 101, 0.8);
-    animation: pulse 2.5s ease-in-out infinite;
+.bottom-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.bar-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    color: var(--white-mid);
+    text-transform: uppercase;
+}
+
+.badge-ping {
+    position: relative;
+    width: 6px;
+    height: 6px;
     flex-shrink: 0;
+}
+
+.badge-ping::before,
+.badge-ping::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+}
+
+.badge-ping::before {
+    background: #3ddc84;
+    box-shadow: 0 0 5px rgba(61, 220, 132, 0.8);
+}
+
+.badge-ping::after {
+    background: #3ddc84;
+    animation: ping 1.8s ease-out infinite;
+}
+
+.bar-sep {
+    color: rgba(255, 70, 85, 0.3);
+    font-family: var(--mono);
+    font-size: 0.6rem;
+}
+
+.bar-info {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    color: var(--white-dim);
+    text-transform: uppercase;
+}
+
+.bottom-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.bar-stat {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+    color: var(--white-dim);
+    text-transform: uppercase;
+    position: relative;
+}
+
+.bar-stat::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--red);
+    transition: width 0.2s;
+}
+
+.bar-stat:hover::after {
+    width: 100%;
 }
 
 /* ─── RESPONSIVE ────────────────────────────────────── */
@@ -471,7 +471,7 @@ async function search() {
         padding-left: 1.5rem;
     }
 
-    .bottom-badge {
+    .bottom-bar {
         padding-left: 1.5rem;
     }
 
@@ -481,10 +481,10 @@ async function search() {
 
     .bg-grad-left {
         background: linear-gradient(to right,
-                #07080f 0%,
-                #07080f 50%,
-                rgba(7, 8, 15, 0.92) 75%,
-                rgba(7, 8, 15, 0.6) 100%);
+            #07080f 0%,
+            #07080f 50%,
+            rgba(7, 8, 15, 0.92) 75%,
+            rgba(7, 8, 15, 0.6) 100%);
     }
 }
 </style>

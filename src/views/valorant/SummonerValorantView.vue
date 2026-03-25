@@ -58,7 +58,7 @@
                                 <span class="rank-queue-label">Competitivo</span>
                                 <div class="rank-body" v-if="currentRank">
                                     <div class="rank-badge">
-                                        <img v-if="currentRank.images?.small" :src="currentRank.images.small"
+                                        <img :src="`/images/emblemasvalorant/${currentRank.tier?.name}.png`" alt="Emblema de liga"
                                             class="rank-emblem-img" @error="$event.target.style.display = 'none'" />
                                         <span class="rank-badge-letter">{{ rankInitials(currentRank.tier?.name)
                                             }}</span>
@@ -87,8 +87,8 @@
                                 <span class="rank-queue-label">Peak</span>
                                 <div class="rank-body">
                                     <div class="rank-badge peak-badge">
-                                        <img v-if="peak.images?.small" :src="peak.images.small" class="rank-emblem-img"
-                                            @error="$event.target.style.display = 'none'" />
+                                        <img :src="`/images/emblemasvalorant/${peak.tier?.name}.png`" alt="Emblema de liga"
+                                            class="rank-emblem-img" @error="$event.target.style.display = 'none'" />
                                         <span class="rank-badge-letter">{{ rankInitials(peak.tier?.name) }}</span>
                                     </div>
                                     <div class="rank-info">
@@ -969,23 +969,12 @@ const agentStats = computed(() => {
 
 .rank-badge {
     flex-shrink: 0;
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
+    width: 80px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    background: linear-gradient(135deg, rgba(255, 70, 85, .18) 0%, rgba(255, 70, 85, .05) 100%);
-    border: 1.5px solid rgba(255, 70, 85, .3);
-    box-shadow: inset 0 1px 0 rgba(255, 70, 85, .15), 0 0 20px rgba(255, 70, 85, .12);
-    overflow: hidden;
-}
-
-.peak-badge {
-    background: linear-gradient(135deg, rgba(123, 159, 255, .18) 0%, rgba(123, 159, 255, .05) 100%);
-    border-color: rgba(123, 159, 255, .3);
-    box-shadow: inset 0 1px 0 rgba(123, 159, 255, .15), 0 0 20px rgba(123, 159, 255, .12);
 }
 
 .rank-emblem-img {
@@ -993,27 +982,12 @@ const agentStats = computed(() => {
     height: 100%;
     object-fit: contain;
     display: block;
-    position: absolute;
-    inset: 0;
-    opacity: 0.9;
-    padding: 6px;
 }
 
 .rank-badge-letter {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: .7rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, .9);
-    position: absolute;
-    bottom: 4px;
-    right: 6px;
-    line-height: 1;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, .8);
-    z-index: 1;
-    background: rgba(0, 0, 0, .45);
-    border-radius: 3px;
-    padding: 1px 2px;
+    display: none;
 }
+
 
 .rank-info {
     display: flex;

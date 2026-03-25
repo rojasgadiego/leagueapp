@@ -9,7 +9,6 @@
 
         <div class="content-layer">
 
-            <!-- NAV -->
             <nav class="nav">
                 <div class="nav-logo">
                     <svg class="nav-logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -21,16 +20,7 @@
                 </div>
             </nav>
 
-            <!-- HERO -->
             <div class="hero">
-
-                <!-- <div class="hero-eyebrow clip-in" style="--delay: 0.05s">
-                    <span class="eyebrow-bracket">[</span>
-                    <span>STATS &amp; ANALYTICS</span>
-                    <span class="eyebrow-bracket">]</span>
-                    <span class="eyebrow-line"></span>
-                </div> -->
-
                 <h1 class="hero-title">
                     <span class="hero-line clip-in" style="--delay: 0.15s">DOMINA</span>
                     <span class="hero-line accent clip-in" style="--delay: 0.28s">
@@ -38,10 +28,6 @@
                         <span class="accent-strike"></span>
                     </span>
                 </h1>
-
-                <!-- <p class="hero-desc clip-in" style="--delay: 0.38s">
-                    Analiza tu rendimiento, rastrea tu rango y mejora tu game.
-                </p> -->
 
                 <form class="search-form clip-in" style="--delay: 0.48s" @submit.prevent="search">
                     <div class="search-wrapper" :class="{ focused: isFocused }">
@@ -67,15 +53,10 @@
                             </template>
                         </button>
                     </div>
-                    <!-- <div class="search-meta">
-                        <span class="meta-hint">Ej: Dieg0ski#LAS</span>
-                        <span v-if="errorMsg" class="search-error">⚠ {{ errorMsg }}</span>
-                    </div> -->
+                    <p v-if="errorMsg" class="search-error">⚠ {{ errorMsg }}</p>
                 </form>
-
             </div>
 
-            <!-- BOTTOM BAR -->
             <div class="bottom-bar clip-in" style="--delay: 0.6s">
                 <div class="bottom-bar-left">
                     <span class="bar-badge">
@@ -94,7 +75,6 @@
 
         </div>
 
-        <!-- Elemento decorativo: crosshair esquina -->
         <div class="crosshair-deco" aria-hidden="true">
             <div class="ch-h"></div>
             <div class="ch-v"></div>
@@ -123,10 +103,7 @@ async function search() {
     const [name, tag] = searchInput.value.split('#')
     router.push({
         name: 'ValorantSummoner',
-        params: {
-            gameName: name,
-            tagLine: tag
-        }
+        params: { gameName: name, tagLine: tag }
     })
 }
 </script>
@@ -134,7 +111,6 @@ async function search() {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Barlow+Condensed:wght@400;500;700;800&family=Share+Tech+Mono&display=swap');
 
-/* ─── VARIABLES ─────────────────────────────────────── */
 :root {
     --red: #FF4655;
     --red-dark: #c93040;
@@ -157,71 +133,28 @@ async function search() {
     padding: 0;
 }
 
-/* ─── ANIMACIONES ───────────────────────────────────── */
 @keyframes clipIn {
-    from {
-        clip-path: inset(0 100% 0 0);
-        opacity: 0;
-    }
-
-    to {
-        clip-path: inset(0 0% 0 0);
-        opacity: 1;
-    }
+    from { clip-path: inset(0 100% 0 0); opacity: 0; }
+    to   { clip-path: inset(0 0% 0 0);   opacity: 1; }
 }
 
 @keyframes pulse {
-
-    0%,
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    50% {
-        opacity: 0.3;
-        transform: scale(0.6);
-    }
+    0%, 100% { opacity: 1; transform: scale(1);   }
+    50%       { opacity: 0.3; transform: scale(0.6); }
 }
 
 @keyframes ping {
-    0% {
-        transform: scale(1);
-        opacity: 0.8;
-    }
-
-    100% {
-        transform: scale(2.4);
-        opacity: 0;
-    }
+    0%   { transform: scale(1);   opacity: 0.8; }
+    100% { transform: scale(2.4); opacity: 0;   }
 }
 
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes scanlines {
-    from {
-        background-position: 0 0;
-    }
-
-    to {
-        background-position: 0 4px;
-    }
+    to { transform: rotate(360deg); }
 }
 
 @keyframes crosshairPulse {
-
-    0%,
-    100% {
-        opacity: 0.12;
-    }
-
-    50% {
-        opacity: 0.22;
-    }
+    0%, 100% { opacity: 0.12; }
+    50%       { opacity: 0.22; }
 }
 
 .clip-in {
@@ -258,38 +191,15 @@ async function search() {
     filter: brightness(0.55) saturate(0.85);
 }
 
-/* Scanlines sutiles para textura CRT / HUD */
-.bg-scanlines {
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(to bottom,
-            transparent 0px,
-            transparent 3px,
-            rgba(0, 0, 0, 0.08) 3px,
-            rgba(0, 0, 0, 0.08) 4px);
-    animation: scanlines 0.4s linear infinite;
-    opacity: 0.4;
-}
-
-/* Viñeta lateral derecha para que el personaje no quede crudo */
-.bg-vignette-right {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 60% 90% at 100% 50%,
-            transparent 40%,
-            rgba(15, 17, 22, 0.55) 70%,
-            rgba(15, 17, 22, 0.9) 100%);
-}
-
 .bg-grad-left {
     position: absolute;
     inset: 0;
     background: linear-gradient(to right,
-            #07080f 0%,
-            #07080f 25%,
-            rgba(7, 8, 15, 0.9) 42%,
-            rgba(7, 8, 15, 0.4) 60%,
-            transparent 78%);
+        #07080f 0%,
+        #07080f 25%,
+        rgba(7, 8, 15, 0.9) 42%,
+        rgba(7, 8, 15, 0.4) 60%,
+        transparent 78%);
 }
 
 .bg-grad-bottom {
@@ -299,26 +209,6 @@ async function search() {
     right: 0;
     height: 28%;
     background: linear-gradient(to top, var(--bg) 0%, transparent 100%);
-}
-
-/* Líneas HUD */
-.hud-line {
-    position: absolute;
-    left: 3.5rem;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(to right,
-            var(--red) 0%,
-            rgba(255, 70, 85, 0.25) 40%,
-            transparent 70%);
-}
-
-.hud-line--top {
-    top: 72px;
-}
-
-.hud-line--bottom {
-    bottom: 56px;
 }
 
 /* ─── CROSSHAIR DECO ────────────────────────────────── */
@@ -333,8 +223,7 @@ async function search() {
     animation: crosshairPulse 3s ease-in-out infinite;
 }
 
-.ch-h,
-.ch-v {
+.ch-h, .ch-v {
     position: absolute;
     background: var(--red);
 }
@@ -413,33 +302,7 @@ async function search() {
     text-transform: uppercase;
 }
 
-.nav-status {
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    background: rgba(255, 70, 85, 0.08);
-    border: 1px solid rgba(255, 70, 85, 0.2);
-    padding: 0.28rem 0.75rem;
-    border-radius: 2px;
-}
-
-.status-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--red);
-    box-shadow: 0 0 6px var(--red);
-    animation: pulse 2s ease-in-out infinite;
-    flex-shrink: 0;
-}
-
-.status-text {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    color: var(--red);
-}
-
+/* ─── HERO ──────────────────────────────────────────── */
 .hero {
     flex: 1;
     display: flex;
@@ -448,30 +311,6 @@ async function search() {
     gap: 1.5rem;
     padding: 0 0 0 3.5rem;
     max-width: 600px;
-}
-
-.hero-eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.18em;
-    color: var(--white-mid);
-    text-transform: uppercase;
-}
-
-.eyebrow-bracket {
-    color: var(--red);
-    font-size: 0.8rem;
-}
-
-.eyebrow-line {
-    flex: 1;
-    max-width: 80px;
-    height: 1px;
-    background: linear-gradient(to right, var(--red), transparent);
-    margin-left: 0.4rem;
 }
 
 .hero-title {
@@ -496,7 +335,6 @@ async function search() {
     position: relative;
 }
 
-/* Línea decorativa bajo la segunda palabra */
 .accent-strike {
     position: absolute;
     bottom: 4px;
@@ -506,17 +344,6 @@ async function search() {
     background: var(--red);
     transform-origin: left;
     animation: clipIn 0.4s 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* ─── DESCRIPCIÓN ───────────────────────────────────── */
-.hero-desc {
-    font-family: var(--ui);
-    font-size: 0.95rem;
-    font-weight: 400;
-    color: var(--white-mid);
-    letter-spacing: 0.04em;
-    max-width: 450px;
-    line-height: 1.55;
 }
 
 /* ─── BUSCADOR ──────────────────────────────────────── */
@@ -533,14 +360,12 @@ async function search() {
     max-width: 460px;
     background: rgba(15, 17, 22, 0.8);
     border: 1.5px solid rgba(255, 70, 85, 0.22);
-    border-radius: 2px;
+    border-radius: 20px;
     overflow: visible;
     backdrop-filter: blur(16px);
     transition: border-color 0.2s, box-shadow 0.2s;
-    border-radius: 20px;
 }
 
-/* Esquinas decorativas tipo Valorant UI */
 .search-corner {
     position: absolute;
     width: 8px;
@@ -565,9 +390,8 @@ async function search() {
 
 .search-wrapper.focused {
     border-color: rgba(255, 70, 85, 0.55);
-    box-shadow:
-        0 0 0 3px rgba(255, 70, 85, 0.07),
-        inset 0 0 24px rgba(255, 70, 85, 0.04);
+    box-shadow: 0 0 0 3px rgba(255, 70, 85, 0.07),
+                inset 0 0 24px rgba(255, 70, 85, 0.04);
 }
 
 .search-icon {
@@ -592,8 +416,8 @@ async function search() {
 }
 
 .search-input::placeholder {
-    color: var(--white-dim);
-    letter-spacing: 0.1em;
+    color: rgba(240, 236, 224, 0.54);
+    letter-spacing: 0.08em;
 }
 
 .search-btn {
@@ -612,7 +436,7 @@ async function search() {
     cursor: pointer;
     flex-shrink: 0;
     min-width: 90px;
-    border-radius: 0px 20px 20px 0px;
+    border-radius: 0 20px 20px 0;
     justify-content: center;
     transition: background 0.15s, gap 0.2s;
     clip-path: polygon(8px 0%, 100% 0%, 100% 100%, 0% 100%);
@@ -621,7 +445,6 @@ async function search() {
 .search-btn:hover:not(:disabled) {
     background: #e83544;
     gap: 0.65rem;
-    border-radius: 0px 20px 20px 0px;
 }
 
 .search-btn:disabled {
@@ -632,20 +455,6 @@ async function search() {
 .btn-arrow {
     flex-shrink: 0;
     color: rgba(255, 255, 255, 0.7);
-}
-
-.search-meta {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding-left: 0.25rem;
-}
-
-.meta-hint {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    color: var(--white-dim);
-    letter-spacing: 0.08em;
 }
 
 .search-error {
@@ -784,16 +593,12 @@ async function search() {
         padding: 1.2rem 1.5rem;
     }
 
-    .hud-line {
-        left: 1.5rem;
-    }
-
     .bg-grad-left {
         background: linear-gradient(to right,
-                var(--bg) 0%,
-                var(--bg) 40%,
-                rgba(15, 17, 22, 0.9) 70%,
-                rgba(15, 17, 22, 0.6) 100%);
+            var(--bg) 0%,
+            var(--bg) 40%,
+            rgba(15, 17, 22, 0.9) 70%,
+            rgba(15, 17, 22, 0.6) 100%);
     }
 
     .crosshair-deco {

@@ -111,3 +111,154 @@ export const SPECTATOR_QUEUE_LABELS = {
   400: 'Normal Draft', 420: 'Solo/Duo', 430: 'Normal Ciegas',
   440: 'Flex', 450: 'ARAM', 900: 'URF', 1020: 'One for All', 0: 'Custom'
 }
+
+
+//-------------ENDPOINT PARA BUILDS-----------------
+//--------------------------------------------------
+
+// const BASE_URL = "https://ddragon.leagueoflegends.com";
+
+// // 🧠 CACHE GLOBAL
+// let versionCache = null;
+// let itemsCache = null;
+
+// // 🔹 Helper genérico
+// const fetchJson = async (url) => {
+//   try {
+//     const res = await fetch(url);
+
+//     if (!res.ok) {
+//       throw new Error(`HTTP ${res.status} - ${res.statusText}`);
+//     }
+
+//     return await res.json();
+//   } catch (error) {
+//     console.error("Fetch error:", error.message);
+//     throw error;
+//   }
+// };
+
+// // 🔹 Obtener versión (cacheada)
+// export const getLatestVersion = async () => {
+//   if (versionCache) return versionCache;
+
+//   const data = await fetchJson(`${BASE_URL}/api/versions.json`);
+//   versionCache = data[0];
+
+//   return versionCache;
+// };
+
+// // 🔹 Helper interno para evitar repetir lógica
+// const getVersion = async () => {
+//   if (!versionCache) {
+//     versionCache = await getLatestVersion();
+//   }
+//   return versionCache;
+// };
+
+// // 🔹 Obtener todos los campeones
+// export const getChampions = async (lang = "es_ES") => {
+//   const version = await getVersion();
+
+//   const data = await fetchJson(
+//     `${BASE_URL}/cdn/${version}/data/${lang}/champion.json`
+//   );
+
+//   return Object.values(data.data);
+// };
+
+// // 🔹 Obtener detalle de campeón
+// export const getChampionById = async (id, lang = "es_ES") => {
+//   const version = await getVersion();
+
+//   const data = await fetchJson(
+//     `${BASE_URL}/cdn/${version}/data/${lang}/champion/${id}.json`
+//   );
+
+//   return data.data[id];
+// };
+
+// // 🔹 Obtener todos los items (cacheados)
+// export const getItems = async (lang = "es_ES") => {
+//   if (itemsCache) return itemsCache;
+
+//   const version = await getVersion();
+
+//   const data = await fetchJson(
+//     `${BASE_URL}/cdn/${version}/data/${lang}/item.json`
+//   );
+
+//   itemsCache = data.data;
+//   return itemsCache;
+// };
+
+// // 🔹 Obtener item específico
+// export const getItemById = async (itemId, lang = "es_ES") => {
+//   const items = await getItems(lang);
+//   return items[itemId];
+// };
+
+// // 🔹 Obtener múltiples items (útil para builds)
+// export const getItemsByIds = async (itemIds = [], lang = "es_ES") => {
+//   const items = await getItems(lang);
+
+//   return itemIds.map((id) => ({
+//     id,
+//     ...items[id],
+//     image: getItemImage(id),
+//   }));
+// };
+
+// // 🔹 Imagen de campeón
+// export const getChampionImage = (championName, type = "splash") => {
+//   switch (type) {
+//     case "tile":
+//       return `${BASE_URL}/cdn/img/champion/tiles/${championName}_0.jpg`;
+//     case "loading":
+//       return `${BASE_URL}/cdn/img/champion/loading/${championName}_0.jpg`;
+//     default:
+//       return `${BASE_URL}/cdn/img/champion/splash/${championName}_0.jpg`;
+//   }
+// };
+
+// // 🔹 Imagen de item
+// export const getItemImage = (itemId) => {
+//   if (!versionCache) {
+//     console.warn("Version no cargada aún");
+//     return "";
+//   }
+
+//   return `${BASE_URL}/cdn/${versionCache}/img/item/${itemId}.png`;
+// };
+
+// // 🔹 Runas (base para futuro)
+// export const getRunes = async () => {
+//   const version = await getVersion();
+
+//   return fetchJson(
+//     `${BASE_URL}/cdn/${version}/data/en_US/runesReforged.json`
+//   );
+// };
+
+// // 🔹 Spells (summoner spells)
+// export const getSummonerSpells = async (lang = "es_ES") => {
+//   const version = await getVersion();
+
+//   const data = await fetchJson(
+//     `${BASE_URL}/cdn/${version}/data/${lang}/summoner.json`
+//   );
+
+//   return data.data;
+// };
+
+// // 🔹 Helper para formatear builds (ready for UI)
+// export const formatBuild = async (itemIds) => {
+//   const items = await getItems();
+
+//   return itemIds.map((id) => ({
+//     id,
+//     name: items[id]?.name,
+//     description: items[id]?.description,
+//     image: getItemImage(id),
+//   }));
+// };

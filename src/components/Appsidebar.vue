@@ -1,6 +1,6 @@
 <template>
     <div class="sidebar-wrapper">
-        <aside class="sidebar">
+        <aside class="sidebar" :class="sidebarTheme">
             <div class="sidebar-top">
                 <button class="icon-btn logo-btn" @click="navigate('/')" title="Inicio">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -15,15 +15,6 @@
 
             <nav class="sidebar-nav">
 
-                <button class="icon-btn" :class="{ active: route.name === 'home' }" @click="navigate('/home')"
-                    title="Buscar Jugador">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                </button>
-
                 <button class="icon-btn game-btn lol" :class="{ active: route.name === 'leagueoflegens' }"
                     @click="navigate('/leagueoflegens')" title="League of Legends">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -37,6 +28,14 @@
                         <path d="M12 2L2 22h4L12 8l6 14h4L12 2z" />
                     </svg>
                 </button>
+
+                <button class="icon-btn game-btn tft" :class="{ active: route.path.startsWith('/tft') }"
+                    @click="navigate('/tft')" title="Teamfight Tactics">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L21.5 7.5V16.5L12 22L2.5 16.5V7.5L12 2ZM12 4.5L4.5 8.75V15.25L12 19.5L19.5 15.25V8.75L12 4.5Z"/>
+                    </svg>
+                </button>
+
             </nav>
 
             <div class="sidebar-divider"></div>
@@ -46,7 +45,7 @@
 </template>
 
 <script setup>
-
+import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
@@ -56,6 +55,20 @@ function navigate(path) {
     router.push(path)
 }
 
+const sidebarTheme = computed(() => {
+    if (route.path.startsWith('/valorant')) {
+        return 'theme-valorant'
+    }
+    if (route.path.startsWith('/leagueoflegens') || 
+        route.path.startsWith('/summoner') || 
+        route.path.startsWith('/match') || 
+        route.path.startsWith('/compare') || 
+        route.path.startsWith('/live') || 
+        route.path.startsWith('/builds')) {
+        return 'theme-lol'
+    }
+    return 'theme-default'
+})
 </script>
 
 <style scoped>
@@ -80,11 +93,26 @@ function navigate(path) {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #FF4655;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+
+    /* Transición suave entre colores */
+    background-color: #1a1a2e;
+    transition: background-color 0.4s ease;
+}
+
+.sidebar.theme-lol {
+    background-color: #c8973a;
+}
+
+.sidebar.theme-valorant {
+    background-color: #FF4655;
+}
+
+.sidebar.theme-default {
+    background-color: #1a1a2e;
 }
 
 .sidebar-top {
@@ -154,30 +182,28 @@ function navigate(path) {
 }
 
 .icon-btn.active {
-    background: rgba(200, 155, 60, 0.15);
-    color: #c8973a;
+    background: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
 }
 
-/* Indicador de estado activo pegado al borde derecho del botón para mantener simetría */
 .icon-btn.active::after {
     content: '';
     position: absolute;
     right: -4px;
     width: 3px;
     height: 16px;
-    background: #c8973a;
+    background: #ffffff;
     border-radius: 4px 0 0 4px;
-    box-shadow: -1px 0 8px rgba(200, 155, 60, 0.4);
+    box-shadow: -1px 0 8px rgba(255, 255, 255, 0.3);
 }
 
-.icon-btn.lol:hover,
+/* Y sobreescribí los colores específicos por juego cuando están activos */
 .icon-btn.lol.active {
-    color: #0bc6e3;
+    color: #ffffff;
 }
 
-.icon-btn.valorant:hover,
 .icon-btn.valorant.active {
-    color: #ff4655;
+    color: #ffffff;
 }
 
 .avatar-btn {
