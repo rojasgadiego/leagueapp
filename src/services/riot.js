@@ -1,6 +1,6 @@
 import { cacheGet, cacheSet } from './cache.js'
 
-const API_KEY = 'RGAPI-1ff426bf-42c5-411c-b43c-91d5f8ee0032'
+const API_KEY = 'RGAPI-82d57a0c-6032-4828-9656-3b2c12a90f49'
 
 async function cachedFetch(key, url) {
   const hit = cacheGet(key)

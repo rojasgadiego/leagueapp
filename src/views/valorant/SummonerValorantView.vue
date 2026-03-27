@@ -832,12 +832,12 @@ const agentStats = computed(() => {
 
 /* ─── GLASS CARD ─────────────────────────────────────── */
 .glass-card {
-    background: var(--gb);
+    background-color: rgba(52, 50, 50, 0.303);
     backdrop-filter: blur(var(--blur)) saturate(1.6);
     -webkit-backdrop-filter: blur(var(--blur)) saturate(1.6);
     border: 1px solid var(--gd);
     border-radius: var(--r);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 4px 24px rgba(0, 0, 0, .35);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 4px 15px rgba(125, 123, 123, 0.35);
 }
 
 /* ─── HEADER CARDS ───────────────────────────────────── */

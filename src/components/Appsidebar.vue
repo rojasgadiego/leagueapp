@@ -82,7 +82,7 @@ const sidebarTheme = computed(() => {
     justify-content: center;
     flex-shrink: 0;
     padding: 12px 0;
-    background-color: #07080f;
+    background-color: transparent
 }
 
 .sidebar {
@@ -96,10 +96,8 @@ const sidebarTheme = computed(() => {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-
     /* Transición suave entre colores */
-    background-color: #1a1a2e;
+    background-color: transparent;
     transition: background-color 0.4s ease;
 }
 
@@ -112,7 +110,7 @@ const sidebarTheme = computed(() => {
 }
 
 .sidebar.theme-default {
-    background-color: #1a1a2e;
+    background-color:transparent;
 }
 
 .sidebar-top {

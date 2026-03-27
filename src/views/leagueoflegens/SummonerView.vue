@@ -16,8 +16,6 @@
                     <span>←</span> Volver
                 </button>
 
-
-
                 <!-- ══ HEADER CARDS ══ -->
                 <div class="header-cards">
 
@@ -302,9 +300,7 @@
                                                 <div class="f-stat-l">CS</div>
                                             </div>
                                             <div class="f-stat">
-                                                <div class="f-stat-v">{{
-                                                    Math.round((getPlayerData(match)?.totalDamageDealtToChampions || 0)
-                                                        / 1000) }}k</div>
+                                                <div class="f-stat-v">{{Math.round((getPlayerData(match)?.totalDamageDealtToChampions || 0)/ 1000) }}k</div>
                                                 <div class="f-stat-l">Daño</div>
                                             </div>
                                             <div class="f-badge">
@@ -747,8 +743,7 @@ onMounted(loadData)
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    background: radial-gradient(ellipse 140% 70% at 50% 0%, rgba(4, 6, 14, .2) 0%, rgba(4, 6, 14, .88) 65%),
-        linear-gradient(to bottom, transparent 0%, rgba(4, 6, 14, .47) 60%, #a6a0a0 100%);
+    background-color: #000000;
 }
 
 .bg-grain {
@@ -831,36 +826,35 @@ onMounted(loadData)
 }
 
 .back-btn {
-    background: #080c1a;
+    background: rgba(52, 50, 50, 0.303);
     color: var(--td);
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1rem;
+    font-size: 0.8rem;
     letter-spacing: .14em;
     text-transform: uppercase;
     cursor: pointer;
-    height: 50px;
+    height: 30px;
     align-self: flex-start;
     padding: 10px;
     margin-bottom: 20px;
-    transition: color .15s;
+    transition: background-color .5s;
     display: flex;
     align-items: center;
     gap: .4rem;
-    border-radius: 20px;
-    border: 0.5px solid #c89b3c;
+    border-radius: 40px;
 }
 
 .back-btn:hover {
-    color: var(--accent);
+    background-color: rgba(85, 81, 81, 0.303);
 }
 
 .glass-card {
-    background: var(--gb);
+    background-color: rgba(52, 50, 50, 0.303);
     backdrop-filter: blur(var(--blur)) saturate(1.6);
     -webkit-backdrop-filter: blur(var(--blur)) saturate(1.6);
     border: 1px solid var(--gd);
     border-radius: var(--r);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 4px 24px rgba(0, 0, 0, .35);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 4px 15px rgba(125, 123, 123, 0.35);
 }
 
 .header-cards {
